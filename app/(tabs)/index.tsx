@@ -55,18 +55,18 @@ export default function Dashboard() {
 
       <View style={styles.summaryContainer}>
         <Card style={StyleSheet.flatten([styles.summaryCard, { backgroundColor: colors.success }])}>
-          <Text style={styles.summaryTitle}>Income</Text>
+          <Text style={styles.summaryTitle}>Ingresos</Text>
           <Text style={styles.summaryAmount}>{formatCurrency(income)}</Text>
         </Card>
         <Card style={StyleSheet.flatten([styles.summaryCard, { backgroundColor: colors.error }])}>
-          <Text style={styles.summaryTitle}>Expenses</Text>
+          <Text style={styles.summaryTitle}>Gastos</Text>
           <Text style={styles.summaryAmount}>{formatCurrency(Math.abs(expenses))}</Text>
         </Card>
       </View>
 
       <View style={styles.section}>
         <Text style={[styles.sectionTitle, { color: colors.text }]}>
-          Expenses by Category - {currentMonth}
+          Gastos por Categoría - {currentMonth}
         </Text>
         {pieData.length > 0 ? (
           <View style={styles.chartContainer}>
@@ -90,16 +90,16 @@ export default function Dashboard() {
           </View>
         ) : (
           <Text style={[styles.noDataText, { color: colors.textSecondary }]}>
-            No expense data for this month
+            No hay datos de gastos para este mes
           </Text>
         )}
       </View>
 
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>Recent Transactions</Text>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Transacciones Recientes</Text>
           <TouchableOpacity onPress={() => router.push('/transactions')}>
-            <Text style={[styles.seeAll, { color: colors.primary }]}>See all</Text>
+            <Text style={[styles.seeAll, { color: colors.primary }]}>Ver todas</Text>
           </TouchableOpacity>
         </View>
         
@@ -109,7 +109,7 @@ export default function Dashboard() {
           ))
         ) : (
           <Text style={[styles.noDataText, { color: colors.textSecondary }]}>
-            No transactions yet. Add your first transaction.
+            Aún no hay transacciones. Agrega tu primera transacción.
           </Text>
         )}
       </View>
