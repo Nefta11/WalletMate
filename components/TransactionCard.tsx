@@ -29,7 +29,7 @@ export default function TransactionCard({ transaction }: TransactionCardProps) {
       <View style={styles.content}>
         <View style={styles.topRow}>
           <Text style={[styles.title, { color: colors.text }]}>
-            {transaction.note}
+            {transaction.note || 'Sin descripción'}
           </Text>
           <Text style={[
             styles.amount,

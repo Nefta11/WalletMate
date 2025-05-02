@@ -117,6 +117,24 @@ export default function Dashboard() {
   );
 }
 
+export default function HomeScreen() {
+  const router = useRouter();
+  const { colors } = useContext(ThemeContext);
+
+  return (
+    <View style={[styles.container, { backgroundColor: colors.background }]}>      
+      <Text style={[styles.title, { color: colors.text }]}>Bienvenido a WalletMate</Text>
+      <Text style={[styles.subtitle, { color: colors.textSecondary }]}>Administra tus finanzas fácilmente</Text>
+      <TouchableOpacity
+        style={[styles.startButton, { backgroundColor: colors.primary }]}
+        onPress={() => router.push('/transaction/new')}
+      >
+        <Text style={styles.startButtonText}>Comenzar</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -230,5 +248,28 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-Regular',
     textAlign: 'center',
     marginVertical: 24,
+  },
+  title: {
+    fontSize: 24,
+    fontFamily: 'Inter-Bold',
+    textAlign: 'center',
+    marginVertical: 16,
+  },
+  subtitle: {
+    fontSize: 16,
+    fontFamily: 'Inter-Regular',
+    textAlign: 'center',
+    marginBottom: 32,
+  },
+  startButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 24,
+    alignSelf: 'center',
+  },
+  startButtonText: {
+    fontSize: 16,
+    fontFamily: 'Inter-Medium',
+    color: '#fff',
   },
 });

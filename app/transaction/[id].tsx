@@ -31,12 +31,12 @@ export default function TransactionDetails() {
 
   const handleDelete = () => {
     Alert.alert(
-      'Delete Transaction',
-      'Are you sure you want to delete this transaction?',
+      'Eliminar Transacción',
+      '¿Estás seguro de que deseas eliminar esta transacción?',
       [
-        { text: 'Cancel', style: 'cancel' },
+        { text: 'Cancelar', style: 'cancel' },
         { 
-          text: 'Delete', 
+          text: 'Eliminar', 
           style: 'destructive',
           onPress: () => {
             if (transaction) {
@@ -61,7 +61,7 @@ export default function TransactionDetails() {
         <TouchableOpacity style={styles.closeButton} onPress={() => router.back()}>
           <X size={24} color={colors.text} />
         </TouchableOpacity>
-        <Text style={[styles.headerTitle, { color: colors.text }]}>Transaction Details</Text>
+        <Text style={[styles.headerTitle, { color: colors.text }]}>Detalles de la Transacción</Text>
         <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
           <Trash2 size={24} color={colors.error} />
         </TouchableOpacity>
@@ -73,7 +73,7 @@ export default function TransactionDetails() {
             styles.transactionType,
             { color: isExpense ? colors.error : colors.success }
           ]}>
-            {isExpense ? 'Expense' : 'Income'}
+            {isExpense ? 'Gasto' : 'Ingreso'}
           </Text>
           <Text style={[
             styles.amount,
@@ -85,7 +85,7 @@ export default function TransactionDetails() {
 
         <Card style={[styles.detailsCard, { backgroundColor: colors.card }]}>
           <View style={styles.detailRow}>
-            <Text style={[styles.detailLabel, { color: colors.textSecondary }]}>Category</Text>
+            <Text style={[styles.detailLabel, { color: colors.textSecondary }]}>Categoría</Text>
             <Text style={[styles.detailValue, { color: colors.text }]}>
               {getCategoryName(transaction.category)}
             </Text>
@@ -94,7 +94,7 @@ export default function TransactionDetails() {
           <View style={styles.divider} />
 
           <View style={styles.detailRow}>
-            <Text style={[styles.detailLabel, { color: colors.textSecondary }]}>Date</Text>
+            <Text style={[styles.detailLabel, { color: colors.textSecondary }]}>Fecha</Text>
             <Text style={[styles.detailValue, { color: colors.text }]}>
               {formatDateForDisplay(new Date(transaction.date))}
             </Text>
@@ -104,7 +104,7 @@ export default function TransactionDetails() {
             <>
               <View style={styles.divider} />
               <View style={styles.detailRow}>
-                <Text style={[styles.detailLabel, { color: colors.textSecondary }]}>Note</Text>
+                <Text style={[styles.detailLabel, { color: colors.textSecondary }]}>Nota</Text>
                 <Text style={[styles.detailValue, { color: colors.text }]}>
                   {transaction.note}
                 </Text>
@@ -118,11 +118,11 @@ export default function TransactionDetails() {
           onPress={() => {
             // For editing we would navigate to the edit screen
             // This would be implemented in a real app
-            Alert.alert('Edit Transaction', 'Editing functionality would go here');
+            Alert.alert('Editar Transacción', 'La funcionalidad de edición iría aquí');
           }}
         >
           <Edit3 size={20} color="#FFF" style={styles.editIcon} />
-          <Text style={styles.editButtonText}>Edit Transaction</Text>
+          <Text style={styles.editButtonText}>Editar Transacción</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

@@ -73,12 +73,12 @@ export default function NewTransaction() {
         <TouchableOpacity style={styles.closeButton} onPress={() => router.back()}>
           <X size={24} color={colors.text} />
         </TouchableOpacity>
-        <Text style={[styles.headerTitle, { color: colors.text }]}>New Transaction</Text>
+        <Text style={[styles.headerTitle, { color: colors.text }]}>Nueva Transacción</Text>
         <TouchableOpacity 
           style={[styles.saveButton, { backgroundColor: colors.primary }]} 
           onPress={handleSave}
         >
-          <Text style={styles.saveButtonText}>Save</Text>
+          <Text style={styles.saveButtonText}>Guardar</Text>
         </TouchableOpacity>
       </Animated.View>
       
@@ -131,7 +131,7 @@ export default function NewTransaction() {
             style={[styles.amountInput, { color: colors.text }]}
             value={amount}
             onChangeText={setAmount}
-            placeholder="0.00"
+            placeholder="Monto"
             placeholderTextColor={colors.textSecondary}
             keyboardType="decimal-pad"
             maxLength={10}
@@ -155,12 +155,12 @@ export default function NewTransaction() {
         </Animated.View>
         
         <Animated.View entering={SlideInRight.delay(400).duration(300)}>
-          <Text style={[styles.fieldLabel, { color: colors.text }]}>Note</Text>
+          <Text style={[styles.fieldLabel, { color: colors.text }]}>Nota (opcional)</Text>
           <TextInput
             style={[styles.noteInput, { backgroundColor: colors.card, color: colors.text }]}
             value={note}
             onChangeText={setNote}
-            placeholder="Add a note"
+            placeholder="Nota (opcional)"
             placeholderTextColor={colors.textSecondary}
             multiline
           />
