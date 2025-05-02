@@ -54,11 +54,11 @@ export default function Dashboard() {
       </View>
 
       <View style={styles.summaryContainer}>
-        <Card style={[styles.summaryCard, { backgroundColor: colors.success }]}>
+        <Card style={StyleSheet.flatten([styles.summaryCard, { backgroundColor: colors.success }])}>
           <Text style={styles.summaryTitle}>Income</Text>
           <Text style={styles.summaryAmount}>{formatCurrency(income)}</Text>
         </Card>
-        <Card style={[styles.summaryCard, { backgroundColor: colors.error }]}>
+        <Card style={StyleSheet.flatten([styles.summaryCard, { backgroundColor: colors.error }])}>
           <Text style={styles.summaryTitle}>Expenses</Text>
           <Text style={styles.summaryAmount}>{formatCurrency(Math.abs(expenses))}</Text>
         </Card>
@@ -117,7 +117,7 @@ export default function Dashboard() {
   );
 }
 
-export default function HomeScreen() {
+export function HomeScreen() {
   const router = useRouter();
   const { colors } = useContext(ThemeContext);
 
