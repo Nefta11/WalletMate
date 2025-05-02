@@ -17,21 +17,21 @@ import {
 } from 'lucide-react-native';
 
 export const categoryOptions = [
-  { label: 'Food & Dining', value: 'food' },
-  { label: 'Shopping', value: 'shopping' },
-  { label: 'Housing', value: 'housing' },
-  { label: 'Transportation', value: 'transportation' },
-  { label: 'Travel', value: 'travel' },
-  { label: 'Entertainment', value: 'entertainment' },
-  { label: 'Healthcare', value: 'healthcare' },
-  { label: 'Clothing', value: 'clothing' },
-  { label: 'Technology', value: 'technology' },
-  { label: 'Salary', value: 'salary' },
-  { label: 'Gifts', value: 'gifts' },
-  { label: 'Investments', value: 'investments' },
-  { label: 'Bills', value: 'bills' },
-  { label: 'Credit Card', value: 'credit' },
-  { label: 'Other', value: 'other' },
+  { label: 'Comida y Cena', value: 'food' },
+  { label: 'Compras', value: 'shopping' },
+  { label: 'Vivienda', value: 'housing' },
+  { label: 'Transporte', value: 'transportation' },
+  { label: 'Viajes', value: 'travel' },
+  { label: 'Entretenimiento', value: 'entertainment' },
+  { label: 'Salud', value: 'healthcare' },
+  { label: 'Ropa', value: 'clothing' },
+  { label: 'Tecnología', value: 'technology' },
+  { label: 'Salario', value: 'salary' },
+  { label: 'Regalos', value: 'gifts' },
+  { label: 'Inversiones', value: 'investments' },
+  { label: 'Facturas', value: 'bills' },
+  { label: 'Tarjeta de Crédito', value: 'credit' },
+  { label: 'Otros', value: 'other' },
 ];
 
 export const getCategoryName = (value: string): string => {

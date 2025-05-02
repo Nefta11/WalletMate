@@ -16,8 +16,8 @@ export const getMonthName = (month: number): string => {
 
 export const getMonthsArray = (): string[] => {
   return [
-    'January', 'February', 'March', 'April', 
-    'May', 'June', 'July', 'August', 
-    'September', 'October', 'November', 'December'
+    'Enero', 'Febrero', 'Marzo', 'Abril', 
+    'Mayo', 'Junio', 'Julio', 'Agosto', 
+    'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
   ];
 };
