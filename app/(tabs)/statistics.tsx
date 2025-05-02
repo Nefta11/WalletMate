@@ -8,6 +8,11 @@ import { formatCurrency } from '@/utils/formatters';
 import { getCategoryColor } from '@/utils/categories';
 import { getMonthName, getMonthsArray } from '@/utils/dateUtils';
 import Card from '@/components/Card';
+import { G } from 'react-native-svg';
+
+function CustomGrid({ direction = 'HORIZONTAL', ...props }) {
+  return <Grid direction={direction} {...props} />;
+}
 
 export default function Statistics() {
   const { getMonthlyTotals, getCategoryTotals, getMonthlyData } = useContext(TransactionsContext);
@@ -84,7 +89,7 @@ export default function Statistics() {
             spacing={0.2}
             gridMin={0}
           >
-            <Grid direction="HORIZONTAL" />
+            <CustomGrid direction="HORIZONTAL" />
           </BarChart>
           
           <BarChart
@@ -97,7 +102,7 @@ export default function Statistics() {
             spacing={0.2}
             gridMin={0}
           >
-            <Grid direction="HORIZONTAL" />
+            <CustomGrid direction="HORIZONTAL" />
           </BarChart>
         </View>
         
