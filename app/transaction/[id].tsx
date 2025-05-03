@@ -8,13 +8,14 @@ import { formatCurrency } from '@/utils/formatters';
 import { formatDateForDisplay } from '@/utils/dateUtils';
 import { getCategoryName } from '@/utils/categories';
 import Card from '@/components/Card';
+import { Transaction } from '@/types'; // Assuming Transaction type is defined in types/index.ts
 
 export default function TransactionDetails() {
   const router = useRouter();
   const { id } = useLocalSearchParams();
   const { transactions, deleteTransaction } = useContext(TransactionsContext);
   const { colors } = useContext(ThemeContext);
-  const [transaction, setTransaction] = useState(null);
+  const [transaction, setTransaction] = useState<Transaction | null>(null); // Updated type
 
   useEffect(() => {
     if (id) {
@@ -83,7 +84,7 @@ export default function TransactionDetails() {
           </Text>
         </View>
 
-        <Card style={[styles.detailsCard, { backgroundColor: colors.card }]}>
+        <Card style={[styles.detailsCard, { backgroundColor: colors.card } as ViewStyle]}>
           <View style={styles.detailRow}>
             <Text style={[styles.detailLabel, { color: colors.textSecondary }]}>Categoría</Text>
             <Text style={[styles.detailValue, { color: colors.text }]}>
