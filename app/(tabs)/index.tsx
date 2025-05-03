@@ -10,6 +10,7 @@ import Card from '@/components/Card';
 import { formatCurrency } from '@/utils/formatters';
 import { getCategoryColor } from '@/utils/categories';
 import { formatMonthYear } from '@/utils/dateUtils';
+import Header from '@/components/Header';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -40,6 +41,7 @@ export default function Dashboard() {
       style={[styles.container, { backgroundColor: colors.background }]} 
       contentContainerStyle={styles.content}
     >
+      <Header title="Dashboard" colors={colors} />
       <View style={styles.header}>
         <View>
           <Text style={[styles.headerTitle, { color: colors.text }]}>Total Balance</Text>

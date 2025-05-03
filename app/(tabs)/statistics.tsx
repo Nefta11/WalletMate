@@ -9,6 +9,7 @@ import { getCategoryColor } from '@/utils/categories';
 import { getMonthName, getMonthsArray } from '@/utils/dateUtils';
 import Card from '@/components/Card';
 import { G, Line } from 'react-native-svg';
+import Header from '@/components/Header';
 
 function CustomGrid({ direction = 'HORIZONTAL', x, y, ticks, ...props }) {
   if (direction === 'HORIZONTAL') {
@@ -88,6 +89,7 @@ export default function Statistics() {
 
   return (
     <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
+      <Header title="Estadísticas" colors={colors} />
       <View style={styles.yearSelector}>
         <TouchableOpacity onPress={prevYear}>
           <Text style={[styles.yearNav, { color: colors.primary }]}>{'<'}</Text>

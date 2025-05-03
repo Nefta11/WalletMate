@@ -7,6 +7,7 @@ import { ThemeContext } from '@/context/ThemeContext';
 import TransactionCard from '@/components/TransactionCard';
 import FilterModal from '@/components/FilterModal';
 import { Transaction } from '@/types';
+import Header from '@/components/Header';
 
 export default function Transactions() {
   const router = useRouter();
@@ -89,6 +90,7 @@ export default function Transactions() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <Header title="Transacciones" colors={colors} />
       <View style={styles.header}>
         <View style={[styles.searchContainer, { backgroundColor: colors.card, borderColor: colors.border }]}>
           <Search size={20} color={colors.textSecondary} />
