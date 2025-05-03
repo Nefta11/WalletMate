@@ -99,7 +99,6 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 32, // Increased padding to lower the header
     padding: 16,
   },
   sectionTitle: {

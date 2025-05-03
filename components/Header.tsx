@@ -25,18 +25,18 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 16,
+        justifyContent: 'center', 
         borderBottomWidth: 1,
         borderBottomColor: '#E0E0E0',
-        paddingTop: 32, // Increased padding to lower the header
+        marginTop: 20,
     },
     icon: {
-        width: 32,
-        height: 32,
-        marginRight: 12,
+        width: 42,
+        height: 42,
+        marginRight: 8, 
     },
     title: {
-        fontSize: 18,
+        fontSize: 25,
         fontFamily: 'Inter-SemiBold',
     },
 });
