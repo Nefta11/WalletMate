@@ -86,9 +86,6 @@ npm run build
 ### Dashboard
 ![Dashboard](assets/images/WalletMate.png)
 
-### Gráficos Interactivos
-![Gráficos](assets/images/icon.png)
-
 ---
 
 ## 🤝 Contribuciones
