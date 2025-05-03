@@ -8,10 +8,42 @@ import { formatCurrency } from '@/utils/formatters';
 import { getCategoryColor } from '@/utils/categories';
 import { getMonthName, getMonthsArray } from '@/utils/dateUtils';
 import Card from '@/components/Card';
-import { G } from 'react-native-svg';
+import { G, Line } from 'react-native-svg';
 
-function CustomGrid({ direction = 'HORIZONTAL', ...props }) {
-  return <Grid direction={direction} {...props} />;
+function CustomGrid({ direction = 'HORIZONTAL', x, y, ticks, ...props }) {
+  if (direction === 'HORIZONTAL') {
+    return (
+      <G>
+        {ticks.map((tick, index) => (
+          <Line
+            key={index}
+            x1="0"
+            x2="100%"
+            y1={y(tick)}
+            y2={y(tick)}
+            stroke="rgba(0,0,0,0.2)"
+            {...props}
+          />
+        ))}
+      </G>
+    );
+  } else {
+    return (
+      <G>
+        {ticks.map((tick, index) => (
+          <Line
+            key={index}
+            y1="0"
+            y2="100%"
+            x1={x(tick)}
+            x2={x(tick)}
+            stroke="rgba(0,0,0,0.2)"
+            {...props}
+          />
+        ))}
+      </G>
+    );
+  }
 }
 
 export default function Statistics() {
