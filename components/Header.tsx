@@ -28,11 +28,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center', 
         borderBottomWidth: 1,
         borderBottomColor: '#E0E0E0',
-        marginTop: 20,
+        marginTop: 18,
     },
     icon: {
-        width: 42,
-        height: 42,
+        width: 50,
+        height: 50,
         marginRight: 8, 
     },
     title: {

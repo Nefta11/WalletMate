@@ -90,7 +90,7 @@ export default function Transactions() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <Header title="Transacciones" colors={colors} style={styles.head} />
+      <Header title="Transacciones" colors={colors} />
       <View style={styles.header}>
         <View style={[styles.searchContainer, { backgroundColor: colors.card, borderColor: colors.border }]}>
           <Search size={20} color={colors.textSecondary} />
