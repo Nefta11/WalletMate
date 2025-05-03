@@ -36,6 +36,7 @@ export default function TabLayout() {
           title: 'Inicio',
           tabBarIcon: ({ color, size }) => <Home size={size} color={color} />,
           headerTitle: 'WalletMate',
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -43,6 +44,7 @@ export default function TabLayout() {
         options={{
           title: 'Transacciones',
           tabBarIcon: ({ color, size }) => <BarChart3 size={size} color={color} />,
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -50,6 +52,7 @@ export default function TabLayout() {
         options={{
           title: 'Estadísticas',
           tabBarIcon: ({ color, size }) => <PieChart size={size} color={color} />,
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -57,6 +60,7 @@ export default function TabLayout() {
         options={{
           title: 'Configuración',
           tabBarIcon: ({ color, size }) => <Settings size={size} color={color} />,
+          headerShown: false,
         }}
       />
     </Tabs>
