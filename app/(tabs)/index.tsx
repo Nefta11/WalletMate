@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { useContext } from 'react';
-import { Plus } from 'lucide-react-native';
+import { Plus, ArrowUp, ArrowDown } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import { PieChart } from 'react-native-svg-charts';
 import { TransactionsContext } from '@/context/TransactionsContext';
@@ -45,7 +45,14 @@ export default function Dashboard() {
       <View style={styles.header}>
         <View>
           <Text style={[styles.headerTitle, { color: colors.text }]}>Total Balance</Text>
-          <Text style={[styles.balance, { color: colors.text }]}>{formatCurrency(balance)}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={[styles.balance, { color: colors.text }]}>{formatCurrency(balance)}</Text>
+            {balance >= 0 ? (
+              <ArrowUp color="green" size={24} style={{ marginLeft: 8 }} />
+            ) : (
+              <ArrowDown color="red" size={24} style={{ marginLeft: 8 }} />
+            )}
+          </View>
         </View>
         <TouchableOpacity
           style={[styles.addButton, { backgroundColor: colors.primary }]}
