@@ -210,6 +210,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 16,
     paddingHorizontal: 16,
+    marginTop: 30,
   },
   closeButton: {
     width: 40,
