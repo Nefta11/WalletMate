@@ -10,6 +10,7 @@ import { getCategoryName } from '@/utils/categories';
 import Card from '@/components/Card';
 import CustomAlert from '@/components/CustomAlert';
 import { Transaction } from '@/types';
+import EditTransactionModal from '@/components/EditTransactionModal';
 
 export default function TransactionDetails() {
   const router = useRouter();
@@ -18,6 +19,7 @@ export default function TransactionDetails() {
   const { colors } = useContext(ThemeContext);
   const [transaction, setTransaction] = useState<Transaction | null>(null); // Updated type
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -71,15 +73,17 @@ export default function TransactionDetails() {
           cancelText="Cancelar"
         />
       </Modal>
-      <View style={[styles.header, { backgroundColor: colors.card }]}>
-        <TouchableOpacity style={styles.closeButton} onPress={() => router.back()}>
-          <X size={24} color={colors.text} />
-        </TouchableOpacity>
-        <Text style={[styles.headerTitle, { color: colors.text }]}>Detalles de la Transacción</Text>
-        <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
-          <Trash2 size={24} color={colors.error} />
-        </TouchableOpacity>
-      </View>
+      <Modal
+        visible={showEditModal}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setShowEditModal(false)}
+      >
+        <EditTransactionModal
+          transaction={transaction}
+          onClose={() => setShowEditModal(false)}
+        />
+      </Modal>
 
       <ScrollView style={styles.content}>
         <View style={styles.amountSection}>
@@ -129,11 +133,7 @@ export default function TransactionDetails() {
 
         <TouchableOpacity
           style={[styles.editButton, { backgroundColor: colors.primary }]}
-          onPress={() => {
-            // For editing we would navigate to the edit screen
-            // This would be implemented in a real app
-            Alert.alert('Editar Transacción', 'La funcionalidad de edición iría aquí');
-          }}
+          onPress={() => setShowEditModal(true)}
         >
           <Edit3 size={20} color="#FFF" style={styles.editIcon} />
           <Text style={styles.editButtonText}>Editar Transacción</Text>
@@ -174,6 +174,8 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: 16,
+    marginTop: 20,
+
   },
   amountSection: {
     alignItems: 'center',
@@ -181,7 +183,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   transactionType: {
-    fontSize: 16,
+    fontSize: 25,
     fontFamily: 'Inter-Medium',
     marginBottom: 8,
   },
