@@ -41,7 +41,7 @@ export default function Dashboard() {
       style={[styles.container, { backgroundColor: colors.background }]}
       contentContainerStyle={styles.content}
     >
-      <Header title="Dashboard" colors={colors} />
+      <Header title="Inicio" colors={colors} />
       <View style={styles.header}>
         <View>
           <Text style={[styles.headerTitle, { color: colors.text }]}>Total Balance</Text>
