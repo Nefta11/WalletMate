@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import { useContext } from 'react';
-import { Home, PieChart, Settings, BarChart3 } from 'lucide-react-native';
+import { Home, PieChart, Settings, BarChart3, Book } from 'lucide-react-native';
 import { ThemeContext } from '@/context/ThemeContext';
 
 export default function TabLayout() {
@@ -52,6 +52,14 @@ export default function TabLayout() {
         options={{
           title: 'Estadísticas',
           tabBarIcon: ({ color, size }) => <PieChart size={size} color={color} />,
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="education"
+        options={{
+          title: 'Educación F.',
+          tabBarIcon: ({ color, size }) => <Book size={size} color={color} />,
           headerShown: false,
         }}
       />
