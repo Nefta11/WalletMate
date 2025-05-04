@@ -9,7 +9,7 @@ import { formatDateForDisplay } from '@/utils/dateUtils';
 import { getCategoryName } from '@/utils/categories';
 import Card from '@/components/Card';
 import CustomAlert from '@/components/CustomAlert';
-import { Transaction } from '@/types'; // Assuming Transaction type is defined in types/index.ts
+import { Transaction } from '@/types';
 
 export default function TransactionDetails() {
   const router = useRouter();
@@ -127,7 +127,7 @@ export default function TransactionDetails() {
           )}
         </Card>
 
-        <TouchableOpacity 
+        <TouchableOpacity
           style={[styles.editButton, { backgroundColor: colors.primary }]}
           onPress={() => {
             // For editing we would navigate to the edit screen
@@ -151,8 +151,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 16,
-    paddingHorizontal: 16,
+    marginTop: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
   },
   headerTitle: {
     fontSize: 18,
