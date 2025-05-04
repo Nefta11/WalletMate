@@ -11,6 +11,7 @@ interface TransactionsContextType {
   getMonthlyTotals: (date: Date) => { income: number; expenses: number; balance: number };
   getCategoryTotals: (date: Date) => CategoryTotal[];
   getMonthlyData: (year: number) => MonthlyTotal[];
+  updateTransaction: (updatedTransaction: Transaction) => void;
 }
 
 export const TransactionsContext = createContext<TransactionsContextType>({
@@ -21,6 +22,7 @@ export const TransactionsContext = createContext<TransactionsContextType>({
   getMonthlyTotals: () => ({ income: 0, expenses: 0, balance: 0 }),
   getCategoryTotals: () => [],
   getMonthlyData: () => [],
+  updateTransaction: () => {},
 });
 
 interface TransactionsProviderProps {
@@ -158,6 +160,15 @@ export const TransactionsProvider = ({ children }: TransactionsProviderProps) =>
     return monthlyData;
   };
 
+  // Update a transaction
+  const updateTransaction = (updatedTransaction: Transaction) => {
+    const updatedTransactions = transactions.map(transaction =>
+      transaction.id === updatedTransaction.id ? updatedTransaction : transaction
+    );
+    setTransactions(updatedTransactions);
+    saveTransactions(updatedTransactions);
+  };
+
   return (
     <TransactionsContext.Provider
       value={{
@@ -168,6 +179,7 @@ export const TransactionsProvider = ({ children }: TransactionsProviderProps) =>
         getMonthlyTotals,
         getCategoryTotals,
         getMonthlyData,
+        updateTransaction,
       }}
     >
       {children}

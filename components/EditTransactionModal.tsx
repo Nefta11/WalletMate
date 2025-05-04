@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Keyboard } from 'react-native';
 import CategoryPicker from '@/components/CategoryPicker';
 import DatePicker from '@/components/DatePicker';
 import { Transaction } from '@/types';
 import { formatDateForDisplay } from '@/utils/dateUtils';
 import { ThemeContext } from '@/context/ThemeContext';
+import { TransactionsContext } from '@/context/TransactionsContext';
 
 type EditTransactionModalProps = {
   transaction: Transaction;
@@ -21,10 +22,17 @@ const EditTransactionModal: React.FC<EditTransactionModalProps> = ({ transaction
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const { colors } = React.useContext(ThemeContext);
+  const { updateTransaction } = useContext(TransactionsContext);
 
   const handleSave = () => {
-    // Logic to save the updated transaction
-    console.log('Updated transaction:', { amount, note, category, date });
+    const updatedTransaction = {
+      ...transaction,
+      amount: parseFloat(amount),
+      note,
+      category,
+      date: date.toISOString(),
+    };
+    updateTransaction(updatedTransaction);
     onClose();
   };
 
