@@ -16,7 +16,7 @@ export default function NewTransaction() {
   const { addTransaction } = useContext(TransactionsContext);
   const { colors } = useContext(ThemeContext);
 
-  const [type, setType] = useState<'income' | 'expense'>('expense');
+  const [type, setType] = useState<'ingreso' | 'gasto'>('gasto');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState(categoryOptions[0].value);
   const [note, setNote] = useState('');
@@ -46,7 +46,7 @@ export default function NewTransaction() {
     // Create transaction object
     const transaction = {
       id: Date.now().toString(),
-      amount: parseFloat(extractNumericValue(amount)) * (type === 'expense' ? -1 : 1),
+      amount: parseFloat(extractNumericValue(amount)) * (type === 'gasto' ? -1 : 1),
       category,
       note: note.trim() || category, // Use category as default note if empty
       date: date.toISOString(),
@@ -94,29 +94,29 @@ export default function NewTransaction() {
           <TouchableOpacity
             style={[
               styles.typeButton,
-              type === 'expense' && [styles.activeTypeButton, { backgroundColor: colors.error }]
+              type === 'gasto' && [styles.activeTypeButton, { backgroundColor: colors.error }]
             ]}
-            onPress={() => setType('expense')}
+            onPress={() => setType('gasto')}
           >
             <Text style={[
               styles.typeButtonText,
-              type === 'expense' && styles.activeTypeText
+              type === 'gasto' && styles.activeTypeText
             ]}>
-              Expense
+              Gasto
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[
               styles.typeButton,
-              type === 'income' && [styles.activeTypeButton, { backgroundColor: colors.success }]
+              type === 'ingreso' && [styles.activeTypeButton, { backgroundColor: colors.success }]
             ]}
-            onPress={() => setType('income')}
+            onPress={() => setType('ingreso')}
           >
             <Text style={[
               styles.typeButtonText,
-              type === 'income' && styles.activeTypeText
+              type === 'ingreso' && styles.activeTypeText
             ]}>
-              Income
+              Ingreso
             </Text>
           </TouchableOpacity>
         </Animated.View>
@@ -139,7 +139,7 @@ export default function NewTransaction() {
         </Animated.View>
 
         <Animated.View entering={SlideInRight.delay(300).duration(300)}>
-          <Text style={[styles.fieldLabel, { color: colors.text }]}>Category</Text>
+          <Text style={[styles.fieldLabel, { color: colors.text }]}>Categoría</Text>
           <TouchableOpacity
             style={[styles.pickerButton, { backgroundColor: colors.card }]}
             onPress={() => {
@@ -167,7 +167,7 @@ export default function NewTransaction() {
         </Animated.View>
 
         <Animated.View entering={SlideInRight.delay(500).duration(300)}>
-          <Text style={[styles.fieldLabel, { color: colors.text }]}>Date</Text>
+          <Text style={[styles.fieldLabel, { color: colors.text }]}>Fecha</Text>
           <TouchableOpacity
             style={[styles.pickerButton, { backgroundColor: colors.card }]}
             onPress={() => {
