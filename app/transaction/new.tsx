@@ -15,24 +15,24 @@ export default function NewTransaction() {
   const router = useRouter();
   const { addTransaction } = useContext(TransactionsContext);
   const { colors } = useContext(ThemeContext);
-  
+
   const [type, setType] = useState<'income' | 'expense'>('expense');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState(categoryOptions[0].value);
   const [note, setNote] = useState('');
   const [date, setDate] = useState(new Date());
-  
+
   const [showCategoryPicker, setShowCategoryPicker] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
-  
+
   const amountInputRef = useRef<TextInput>(null);
-  
+
   // Focus amount input on component mount
   useEffect(() => {
     const timer = setTimeout(() => {
       amountInputRef.current?.focus();
     }, 300);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -42,7 +42,7 @@ export default function NewTransaction() {
       alert('Please enter a valid amount');
       return;
     }
-    
+
     // Create transaction object
     const transaction = {
       id: Date.now().toString(),
@@ -51,14 +51,14 @@ export default function NewTransaction() {
       note: note.trim() || category, // Use category as default note if empty
       date: date.toISOString(),
     };
-    
+
     // Add transaction
     addTransaction(transaction);
-    
+
     // Navigate back
     router.back();
   };
-  
+
   const getCategoryName = (value: string) => {
     const categoryOption = categoryOptions.find(cat => cat.value === value);
     return categoryOption ? categoryOption.label : '';
@@ -66,7 +66,7 @@ export default function NewTransaction() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <Animated.View 
+      <Animated.View
         entering={FadeIn.duration(300)}
         style={[styles.header, { backgroundColor: colors.card }]}
       >
@@ -74,20 +74,20 @@ export default function NewTransaction() {
           <X size={24} color={colors.text} />
         </TouchableOpacity>
         <Text style={[styles.headerTitle, { color: colors.text }]}>Nueva Transacción</Text>
-        <TouchableOpacity 
-          style={[styles.saveButton, { backgroundColor: colors.primary }]} 
+        <TouchableOpacity
+          style={[styles.saveButton, { backgroundColor: colors.primary }]}
           onPress={handleSave}
         >
           <Text style={styles.saveButtonText}>Guardar</Text>
         </TouchableOpacity>
       </Animated.View>
-      
-      <ScrollView 
+
+      <ScrollView
         style={styles.content}
         contentContainerStyle={styles.contentContainer}
         keyboardShouldPersistTaps="handled"
       >
-        <Animated.View 
+        <Animated.View
           entering={SlideInRight.delay(100).duration(300)}
           style={styles.typeSelector}
         >
@@ -120,8 +120,8 @@ export default function NewTransaction() {
             </Text>
           </TouchableOpacity>
         </Animated.View>
-        
-        <Animated.View 
+
+        <Animated.View
           entering={SlideInRight.delay(200).duration(300)}
           style={[styles.amountContainer, { backgroundColor: colors.card }]}
         >
@@ -137,7 +137,7 @@ export default function NewTransaction() {
             maxLength={10}
           />
         </Animated.View>
-        
+
         <Animated.View entering={SlideInRight.delay(300).duration(300)}>
           <Text style={[styles.fieldLabel, { color: colors.text }]}>Category</Text>
           <TouchableOpacity
@@ -153,7 +153,7 @@ export default function NewTransaction() {
             <ChevronDown size={20} color={colors.textSecondary} />
           </TouchableOpacity>
         </Animated.View>
-        
+
         <Animated.View entering={SlideInRight.delay(400).duration(300)}>
           <Text style={[styles.fieldLabel, { color: colors.text }]}>Nota (opcional)</Text>
           <TextInput
@@ -165,7 +165,7 @@ export default function NewTransaction() {
             multiline
           />
         </Animated.View>
-        
+
         <Animated.View entering={SlideInRight.delay(500).duration(300)}>
           <Text style={[styles.fieldLabel, { color: colors.text }]}>Date</Text>
           <TouchableOpacity
@@ -182,14 +182,14 @@ export default function NewTransaction() {
           </TouchableOpacity>
         </Animated.View>
       </ScrollView>
-      
+
       <CategoryPicker
         visible={showCategoryPicker}
         onClose={() => setShowCategoryPicker(false)}
         selectedCategory={category}
         onSelectCategory={setCategory}
       />
-      
+
       <DatePicker
         visible={showDatePicker}
         onClose={() => setShowDatePicker(false)}

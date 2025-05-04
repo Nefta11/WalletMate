@@ -37,8 +37,8 @@ export default function Dashboard() {
   const currentMonth = formatMonthYear(new Date());
 
   return (
-    <ScrollView 
-      style={[styles.container, { backgroundColor: colors.background }]} 
+    <ScrollView
+      style={[styles.container, { backgroundColor: colors.background }]}
       contentContainerStyle={styles.content}
     >
       <Header title="Dashboard" colors={colors} />
@@ -47,7 +47,7 @@ export default function Dashboard() {
           <Text style={[styles.headerTitle, { color: colors.text }]}>Total Balance</Text>
           <Text style={[styles.balance, { color: colors.text }]}>{formatCurrency(balance)}</Text>
         </View>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={[styles.addButton, { backgroundColor: colors.primary }]}
           onPress={() => router.push('/transaction/new')}
         >
@@ -72,10 +72,10 @@ export default function Dashboard() {
         </Text>
         {pieData.length > 0 ? (
           <View style={styles.chartContainer}>
-            <PieChart 
-              style={styles.chart} 
-              data={pieData} 
-              innerRadius="60%" 
+            <PieChart
+              style={styles.chart}
+              data={pieData}
+              innerRadius="60%"
               padAngle={0.02}
             />
             <View style={styles.chartLegend}>
@@ -104,7 +104,7 @@ export default function Dashboard() {
             <Text style={[styles.seeAll, { color: colors.primary }]}>Ver todas</Text>
           </TouchableOpacity>
         </View>
-        
+
         {recentTransactions.length > 0 ? (
           recentTransactions.map(transaction => (
             <TransactionCard key={transaction.id} transaction={transaction} />
@@ -124,7 +124,7 @@ export function HomeScreen() {
   const { colors } = useContext(ThemeContext);
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>      
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Text style={[styles.title, { color: colors.text }]}>Bienvenido a WalletMate</Text>
       <Text style={[styles.subtitle, { color: colors.textSecondary }]}>Administra tus finanzas fácilmente</Text>
       <TouchableOpacity

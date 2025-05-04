@@ -25,7 +25,7 @@ export default function SettingsScreen() {
   };
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>  
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
       <Modal
         visible={showAlert}
         transparent={true}
@@ -42,7 +42,7 @@ export default function SettingsScreen() {
         />
       </Modal>
       <Text style={[styles.sectionTitle, { color: colors.text }]}>Apariencia</Text>
-      
+
       <Card style={[styles.card, { backgroundColor: colors.card }]}>
         <View style={styles.settingRow}>
           <View style={styles.settingInfo}>
@@ -61,9 +61,9 @@ export default function SettingsScreen() {
           />
         </View>
       </Card>
-      
+
       <Text style={[styles.sectionTitle, { color: colors.text }]}>Datos</Text>
-      
+
       <Card style={[styles.card, { backgroundColor: colors.card }]}>
         <TouchableOpacity style={styles.settingRow} onPress={confirmReset}>
           <View style={styles.settingInfo}>
@@ -71,9 +71,9 @@ export default function SettingsScreen() {
             <Text style={[styles.settingText, { color: colors.error }]}>Restablecer Todos los Datos</Text>
           </View>
         </TouchableOpacity>
-        
+
         <View style={styles.divider} />
-        
+
         <TouchableOpacity style={styles.settingRow}>
           <View style={styles.settingInfo}>
             <Share size={20} color={colors.text} />
@@ -81,9 +81,9 @@ export default function SettingsScreen() {
           </View>
         </TouchableOpacity>
       </Card>
-      
+
       <Text style={[styles.sectionTitle, { color: colors.text }]}>Acerca de</Text>
-      
+
       <Card style={[styles.card, { backgroundColor: colors.card }]}>
         <TouchableOpacity style={styles.settingRow}>
           <View style={styles.settingInfo}>
@@ -91,9 +91,9 @@ export default function SettingsScreen() {
             <Text style={[styles.settingText, { color: colors.text }]}>Ayuda y Soporte</Text>
           </View>
         </TouchableOpacity>
-        
+
         <View style={styles.divider} />
-        
+
         <TouchableOpacity style={styles.settingRow}>
           <View style={styles.settingInfo}>
             <Info size={20} color={colors.text} />
@@ -101,7 +101,7 @@ export default function SettingsScreen() {
           </View>
         </TouchableOpacity>
       </Card>
-      
+
       <View style={styles.footer}>
         <Text style={[styles.version, { color: colors.textSecondary }]}>
           WalletMate v1.0.0

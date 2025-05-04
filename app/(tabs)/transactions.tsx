@@ -26,42 +26,42 @@ export default function Transactions() {
   // Apply filters and search
   useEffect(() => {
     let result = [...transactions];
-    
+
     // Type filter
     if (filters.type !== 'all') {
-      result = result.filter(t => 
+      result = result.filter(t =>
         filters.type === 'income' ? t.amount > 0 : t.amount < 0
       );
     }
-    
+
     // Category filter
     if (filters.category !== 'all') {
       result = result.filter(t => t.category === filters.category);
     }
-    
+
     // Date range filter
     if (filters.startDate) {
       const startDate = new Date(filters.startDate);
       result = result.filter(t => new Date(t.date) >= startDate);
     }
-    
+
     if (filters.endDate) {
       const endDate = new Date(filters.endDate);
       result = result.filter(t => new Date(t.date) <= endDate);
     }
-    
+
     // Search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      result = result.filter(t => 
-        t.note.toLowerCase().includes(query) || 
+      result = result.filter(t =>
+        t.note.toLowerCase().includes(query) ||
         Math.abs(t.amount).toString().includes(query)
       );
     }
-    
+
     // Sort by date (newest first)
     result.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-    
+
     setFilteredTransactions(result);
   }, [transactions, filters, searchQuery]);
 
@@ -107,8 +107,8 @@ export default function Transactions() {
             </TouchableOpacity>
           ) : null}
         </View>
-        <TouchableOpacity 
-          style={[styles.filterButton, { borderColor: colors.border }]} 
+        <TouchableOpacity
+          style={[styles.filterButton, { borderColor: colors.border }]}
           onPress={() => setShowFilters(true)}
         >
           <Filter size={20} color={colors.text} />

@@ -5,7 +5,7 @@ import { ThemeContext } from '@/context/ThemeContext';
 
 export default function TabLayout() {
   const { theme, colors } = useContext(ThemeContext);
-  
+
   return (
     <Tabs
       screenOptions={{

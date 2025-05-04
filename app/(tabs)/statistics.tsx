@@ -50,18 +50,18 @@ function CustomGrid({ direction = 'HORIZONTAL', x, y, ticks, ...props }) {
 export default function Statistics() {
   const { getMonthlyTotals, getCategoryTotals, getMonthlyData } = useContext(TransactionsContext);
   const { colors } = useContext(ThemeContext);
-  
+
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  
+
   const currentDate = new Date(selectedYear, selectedMonth, 1);
   const { income, expenses } = getMonthlyTotals(currentDate);
   const categories = getCategoryTotals(currentDate);
   const monthlyData = getMonthlyData(selectedYear);
-  
+
   // Generate months for month selector
   const months = getMonthsArray();
-  
+
   // Previous and next year handlers
   const prevYear = () => setSelectedYear(selectedYear - 1);
   const nextYear = () => {
@@ -70,14 +70,14 @@ export default function Statistics() {
       setSelectedYear(newYear);
     }
   };
-  
+
   // Bar chart data
   const barData = monthlyData.map(item => ({
     month: item.month,
     income: item.income,
     expenses: Math.abs(item.expenses)
   }));
-  
+
   // Pie chart data
   const pieData = categories.map(category => ({
     value: Math.abs(category.amount),
@@ -95,13 +95,13 @@ export default function Statistics() {
           <Text style={[styles.yearNav, { color: colors.primary }]}>{'<'}</Text>
         </TouchableOpacity>
         <Text style={[styles.yearText, { color: colors.text }]}>{selectedYear}</Text>
-        <TouchableOpacity 
-          onPress={nextYear} 
+        <TouchableOpacity
+          onPress={nextYear}
           disabled={selectedYear >= new Date().getFullYear()}
         >
-          <Text 
+          <Text
             style={[
-              styles.yearNav, 
+              styles.yearNav,
               { color: selectedYear >= new Date().getFullYear() ? colors.textSecondary : colors.primary }
             ]}
           >
@@ -109,7 +109,7 @@ export default function Statistics() {
           </Text>
         </TouchableOpacity>
       </View>
-      
+
       <Card style={[styles.chartCard, { backgroundColor: colors.card }]}>
         <Text style={[styles.chartTitle, { color: colors.text }]}>Resumen Mensual - {selectedYear}</Text>
         <View style={styles.barChartContainer}>
@@ -125,7 +125,7 @@ export default function Statistics() {
           >
             <CustomGrid direction="HORIZONTAL" />
           </BarChart>
-          
+
           <BarChart
             style={[styles.barChart, styles.expenseChart]}
             data={barData}
@@ -139,7 +139,7 @@ export default function Statistics() {
             <CustomGrid direction="HORIZONTAL" />
           </BarChart>
         </View>
-        
+
         <View style={styles.xAxisContainer}>
           <XAxis
             data={barData}
@@ -148,7 +148,7 @@ export default function Statistics() {
             svg={{ fontSize: 10, fill: colors.text }}
           />
         </View>
-        
+
         <View style={styles.legendContainer}>
           <View style={styles.legendItem}>
             <View style={[styles.legendColor, { backgroundColor: colors.success }]} />
@@ -160,11 +160,11 @@ export default function Statistics() {
           </View>
         </View>
       </Card>
-      
+
       <Text style={[styles.monthSelectorTitle, { color: colors.text }]}>Seleccionar Mes</Text>
-      <ScrollView 
-        horizontal 
-        showsHorizontalScrollIndicator={false} 
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
         style={styles.monthSelector}
         contentContainerStyle={styles.monthSelectorContent}
       >
@@ -177,7 +177,7 @@ export default function Statistics() {
             ]}
             onPress={() => setSelectedMonth(index)}
           >
-            <Text 
+            <Text
               style={[
                 styles.monthText,
                 { color: selectedMonth === index ? '#FFF' : colors.text }
@@ -188,7 +188,7 @@ export default function Statistics() {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      
+
       <View style={styles.monthStats}>
         <Card style={[styles.statCard, { backgroundColor: colors.success }]}>
           <Text style={styles.statLabel}>Ingresos</Text>
@@ -199,12 +199,12 @@ export default function Statistics() {
           <Text style={styles.statValue}>{formatCurrency(Math.abs(expenses))}</Text>
         </Card>
       </View>
-      
+
       <Card style={[styles.categoryCard, { backgroundColor: colors.card }]}>
         <Text style={[styles.chartTitle, { color: colors.text }]}>
           Gastos por Categoría - {getMonthName(selectedMonth)} {selectedYear}
         </Text>
-        
+
         {pieData.length > 0 ? (
           <View style={styles.pieChartContainer}>
             <PieChart
@@ -213,7 +213,7 @@ export default function Statistics() {
               innerRadius="60%"
               padAngle={0.02}
             />
-            
+
             <View style={styles.categoryLegend}>
               {categories.map(category => (
                 <View key={category.name} style={styles.categoryItem}>
