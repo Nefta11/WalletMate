@@ -1,31 +1,46 @@
-import { useContext } from 'react';
-import { View, Text, StyleSheet, Switch, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { useContext, useState } from 'react';
+import { View, Text, StyleSheet, Switch, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import { ThemeContext } from '@/context/ThemeContext';
 import { TransactionsContext } from '@/context/TransactionsContext';
 import { Sun, Moon, Trash2, HelpCircle, Share, Info } from 'lucide-react-native';
 import Card from '@/components/Card';
+import CustomAlert from '@/components/CustomAlert';
 
 export default function SettingsScreen() {
   const { theme, toggleTheme, colors } = useContext(ThemeContext);
   const { clearAllTransactions } = useContext(TransactionsContext);
-  
+  const [showAlert, setShowAlert] = useState(false);
+
   const confirmReset = () => {
-    Alert.alert(
-      'Reset All Data',
-      'This will permanently delete all your transactions. This action cannot be undone.',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { 
-          text: 'Reset', 
-          style: 'destructive',
-          onPress: clearAllTransactions
-        },
-      ]
-    );
+    setShowAlert(true);
+  };
+
+  const handleConfirmReset = () => {
+    clearAllTransactions();
+    setShowAlert(false);
+  };
+
+  const handleCancelReset = () => {
+    setShowAlert(false);
   };
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>  
+      <Modal
+        visible={showAlert}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={handleCancelReset}
+      >
+        <CustomAlert
+          title="Restablecer Todos los Datos"
+          message="Esto eliminará permanentemente todas tus transacciones. Esta acción no se puede deshacer."
+          onConfirm={handleConfirmReset}
+          onCancel={handleCancelReset}
+          confirmText="Restablecer"
+          cancelText="Cancelar"
+        />
+      </Modal>
       <Text style={[styles.sectionTitle, { color: colors.text }]}>Apariencia</Text>
       
       <Card style={[styles.card, { backgroundColor: colors.card }]}>

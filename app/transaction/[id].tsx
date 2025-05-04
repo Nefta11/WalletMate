@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { X, Trash2, Edit3 } from 'lucide-react-native';
 import { TransactionsContext } from '@/context/TransactionsContext';
@@ -8,6 +8,7 @@ import { formatCurrency } from '@/utils/formatters';
 import { formatDateForDisplay } from '@/utils/dateUtils';
 import { getCategoryName } from '@/utils/categories';
 import Card from '@/components/Card';
+import CustomAlert from '@/components/CustomAlert';
 import { Transaction } from '@/types'; // Assuming Transaction type is defined in types/index.ts
 
 export default function TransactionDetails() {
@@ -16,6 +17,7 @@ export default function TransactionDetails() {
   const { transactions, deleteTransaction } = useContext(TransactionsContext);
   const { colors } = useContext(ThemeContext);
   const [transaction, setTransaction] = useState<Transaction | null>(null); // Updated type
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -31,23 +33,19 @@ export default function TransactionDetails() {
   }, [id, transactions, router]);
 
   const handleDelete = () => {
-    Alert.alert(
-      'Eliminar Transacción',
-      '¿Estás seguro de que deseas eliminar esta transacción?',
-      [
-        { text: 'Cancelar', style: 'cancel' },
-        { 
-          text: 'Eliminar', 
-          style: 'destructive',
-          onPress: () => {
-            if (transaction) {
-              deleteTransaction(transaction.id);
-              router.back();
-            }
-          }
-        },
-      ]
-    );
+    setShowDeleteAlert(true);
+  };
+
+  const confirmDelete = () => {
+    if (transaction) {
+      deleteTransaction(transaction.id);
+      router.back();
+    }
+    setShowDeleteAlert(false);
+  };
+
+  const cancelDelete = () => {
+    setShowDeleteAlert(false);
   };
 
   if (!transaction) {
@@ -58,6 +56,21 @@ export default function TransactionDetails() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <Modal
+        visible={showDeleteAlert}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={cancelDelete}
+      >
+        <CustomAlert
+          title="Eliminar Transacción"
+          message="¿Estás seguro de que deseas eliminar esta transacción?"
+          onConfirm={confirmDelete}
+          onCancel={cancelDelete}
+          confirmText="Eliminar"
+          cancelText="Cancelar"
+        />
+      </Modal>
       <View style={[styles.header, { backgroundColor: colors.card }]}>
         <TouchableOpacity style={styles.closeButton} onPress={() => router.back()}>
           <X size={24} color={colors.text} />
