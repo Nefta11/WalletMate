@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { View, Text, StyleSheet, Switch, TouchableOpacity, ScrollView, Modal } from 'react-native';
+import { View, Text, StyleSheet, Switch, TouchableOpacity, ScrollView, Modal, Image } from 'react-native';
 import { ThemeContext } from '@/context/ThemeContext';
 import { TransactionsContext } from '@/context/TransactionsContext';
 import { Sun, Moon, Trash2, HelpCircle, Share, Info } from 'lucide-react-native';
@@ -10,7 +10,7 @@ export default function SettingsScreen() {
   const { theme, toggleTheme, colors } = useContext(ThemeContext);
   const { clearAllTransactions } = useContext(TransactionsContext);
   const [showAlert, setShowAlert] = useState(false);
-  const [showAboutModal, setShowAboutModal] = useState(false); // Nuevo estado para el modal
+  const [showAboutModal, setShowAboutModal] = useState(false);
 
   const confirmReset = () => {
     setShowAlert(true);
@@ -111,7 +111,10 @@ export default function SettingsScreen() {
         onRequestClose={() => setShowAboutModal(false)}
       >
         <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center', alignItems: 'center' }}>
-          <View style={{ backgroundColor: colors.card, borderRadius: 16, padding: 24, width: '85%' }}>
+          <View style={{ backgroundColor: colors.card, borderRadius: 16, padding: 24, width: '85%', alignItems: 'center' }}>
+            <View style={{ alignItems: 'center', marginBottom: 8 }}>
+              <Image source={require('../../assets/images/WalletMate-removebg-preview.png')} style={{ width: 70, height: 70, marginBottom: -15 }} resizeMode="contain" />
+            </View>
             <Text style={{ fontSize: 20, fontFamily: 'Inter-SemiBold', color: colors.primary, marginBottom: 12, textAlign: 'center' }}>Acerca de WalletMate</Text>
             <Text style={{ color: colors.text, fontFamily: 'Inter-Regular', fontSize: 15, marginBottom: 10, textAlign: 'center' }}>
               WalletMate es una aplicación diseñada para ayudarte a gestionar tus finanzas personales de manera sencilla y eficiente. Permite registrar tus ingresos y gastos, visualizar estadísticas y aprender sobre educación financiera.
