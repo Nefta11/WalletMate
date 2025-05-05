@@ -17,6 +17,7 @@ WalletMate es una aplicación diseñada para ayudarte a administrar tus finanzas
 - Agrega nuevas transacciones fácilmente.
 - Consulta tus transacciones recientes.
 - Filtra y organiza tus transacciones por categorías.
+- **Exporta tus transacciones** en formato CSV para compartir o respaldar.
 
 ### 🎨 Personalización de Temas
 - Cambia entre temas claros y oscuros para una experiencia visual personalizada.
@@ -29,6 +30,7 @@ WalletMate es una aplicación diseñada para ayudarte a administrar tus finanzas
 - **Expo Router**: Para la navegación dentro de la aplicación.
 - **Context API**: Para la gestión del estado global (temas y transacciones).
 - **react-native-svg-charts**: Para la visualización de gráficos.
+- **expo-file-system** y **expo-sharing**: Para la exportación y compartición de archivos.
 
 ---
 
@@ -46,15 +48,29 @@ walletmate/
 │       ├── [id].tsx           # Detalles de una transacción
 │       ├── new.tsx            # Crear una nueva transacción
 ├── components/
+│   ├── AboutModal.tsx         # Modal para mostrar información sobre la app
 │   ├── Card.tsx               # Componente de tarjeta reutilizable
+│   ├── CategoryPicker.tsx     # Selector de categorías
+│   ├── CustomAlert.tsx        # Alerta personalizada
+│   ├── DatePicker.tsx         # Selector de fechas
+│   ├── EditTransactionModal.tsx # Modal para editar transacciones
+│   ├── ExportAlert.tsx        # Alerta para exportar transacciones
+│   ├── FilterModal.tsx        # Modal para filtrar transacciones
+│   ├── Header.tsx             # Encabezado reutilizable
 │   ├── TransactionCard.tsx    # Componente para mostrar transacciones
 ├── context/
 │   ├── ThemeContext.tsx       # Contexto para la gestión de temas
 │   ├── TransactionsContext.tsx # Contexto para la gestión de transacciones
+├── hooks/
+│   ├── useFrameworkReady.ts   # Hook para verificar si el framework está listo
 ├── utils/
 │   ├── categories.ts          # Utilidades para categorías
 │   ├── dateUtils.ts           # Utilidades para manejo de fechas
 │   ├── formatters.ts          # Formateadores de datos
+│   ├── exportUtils.ts         # Funciones para exportar transacciones
+├── assets/
+│   ├── images/                # Imágenes y recursos gráficos
+│       ├── WalletMate.png     # Captura de pantalla del Dashboard
 ```
 
 ---
@@ -81,10 +97,9 @@ npm run build
 
 ---
 
-## 🖼️ Capturas de Pantalla
+## 🧪 Pruebas
 
-### Dashboard
-![Dashboard](assets/images/WalletMate.png)
+Actualmente, WalletMate no incluye un conjunto de pruebas automatizadas. Sin embargo, puedes contribuir agregando pruebas unitarias o de integración utilizando herramientas como Jest o React Testing Library.
 
 ---
 
@@ -98,8 +113,8 @@ npm run build
 ---
 
 ## 📜 Licencia
-Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
-[text](app/(tabs)/index.tsx)
+Este proyecto está protegido por una licencia propietaria. Todos los derechos están reservados por Neftali Arturo Hernández Vergara. Está estrictamente prohibido copiar, modificar, distribuir o utilizar este software sin autorización explícita. Consulta el archivo `LICENSE` para más detalles.
+
 ---
 
 ## 📧 Contacto
