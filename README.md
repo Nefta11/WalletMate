@@ -119,7 +119,7 @@ Este proyecto está protegido por una licencia propietaria. Todos los derechos e
 
 ## 📧 Contacto
 Si tienes preguntas o sugerencias, no dudes en contactarnos:
-- **Email**: neftaliarturohernandez@gmail.com.com
+- **Email**: neftaliarturohernandez@gmail.com
 - **Sitio Web**: [Nefta11Dev](https://neftalivergaraportafolio.netlify.app/)
 
 ---
