@@ -58,6 +58,15 @@ export default function TransactionDetails() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={[styles.header, { backgroundColor: colors.card }]}>
+        <TouchableOpacity style={styles.closeButton} onPress={() => router.back()}>
+          <X size={24} color={colors.text} />
+        </TouchableOpacity>
+        <Text style={[styles.headerTitle, { color: colors.text }]}>Detalles de la Transacción</Text>
+        <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
+          <Trash2 size={24} color={colors.error} />
+        </TouchableOpacity>
+      </View>
       <Modal
         visible={showDeleteAlert}
         transparent={true}
