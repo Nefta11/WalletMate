@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "walletmate",
-    "slug": "bolt-expo-nativewind",
+    "slug": "walletmate",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/WalletMate-removebg-preview.png",
