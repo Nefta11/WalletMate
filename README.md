@@ -119,8 +119,8 @@ Este proyecto está protegido por una licencia propietaria. Todos los derechos e
 
 ## 📧 Contacto
 Si tienes preguntas o sugerencias, no dudes en contactarnos:
-- **Email**: support@walletmate.com
-- **Sitio Web**: [www.walletmate.com](http://www.walletmate.com)
+- **Email**: neftaliarturohernandez@gmail.com.com
+- **Sitio Web**: [Nefta11Dev](https://neftalivergaraportafolio.netlify.app/)
 
 ---
 
