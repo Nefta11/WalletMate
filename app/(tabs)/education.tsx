@@ -16,7 +16,23 @@ import { Ionicons } from '@expo/vector-icons';
 const { width } = Dimensions.get('window');
 
 // Componente para las tarjetas de lecciones
-const LessonCard = ({ title, emoji, description, onPress, colors, isCompleted }) => {
+type LessonCardProps = {
+    title: string;
+    emoji: string;
+    description: string;
+    onPress: () => void;
+    colors: {
+        card: string;
+        text: string;
+        textSecondary: string;
+        success?: string;
+        primary?: string;
+        background?: string;
+    };
+    isCompleted: boolean;
+};
+
+const LessonCard: React.FC<LessonCardProps> = ({ title, emoji, description, onPress, colors, isCompleted }) => {
     const [scaleAnim] = useState(new Animated.Value(1));
 
     const handlePressIn = () => {
@@ -63,7 +79,18 @@ const LessonCard = ({ title, emoji, description, onPress, colors, isCompleted })
 };
 
 // Componente para el glosario expandible
-const GlossaryItem = ({ term, definition, colors }) => {
+type GlossaryItemProps = {
+    term: string;
+    definition: string;
+    colors: {
+        card: string;
+        text: string;
+        textSecondary: string;
+        primary: string;
+    };
+};
+
+const GlossaryItem: React.FC<GlossaryItemProps> = ({ term, definition, colors }) => {
     const [expanded, setExpanded] = useState(false);
     const [animation] = useState(new Animated.Value(0));
 
@@ -109,8 +136,15 @@ const GlossaryItem = ({ term, definition, colors }) => {
 
 export default function Education() {
     const { colors } = useContext(ThemeContext);
-    const [selectedLesson, setSelectedLesson] = useState(null);
-    const [completedLessons, setCompletedLessons] = useState([]);
+    type Lesson = {
+        id: number;
+        title: string;
+        emoji: string;
+        description: string;
+        content: string;
+    };
+    const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
+    const [completedLessons, setCompletedLessons] = useState<number[]>([]);
 
     const lessons = [
         {
@@ -187,7 +221,7 @@ export default function Education() {
 
     const [currentTip] = useState(dailyTips[Math.floor(Math.random() * dailyTips.length)]);
 
-    const handleLessonComplete = (lessonId) => {
+    const handleLessonComplete = (lessonId: number) => {
         if (!completedLessons.includes(lessonId)) {
             setCompletedLessons([...completedLessons, lessonId]);
         }
@@ -293,10 +327,10 @@ export default function Education() {
 
                             <TouchableOpacity
                                 style={[styles.completeButton, { backgroundColor: colors.primary }]}
-                                onPress={() => handleLessonComplete(selectedLesson?.id)}
+                                onPress={() => selectedLesson && handleLessonComplete(selectedLesson.id)}
                             >
                                 <Text style={styles.completeButtonText}>
-                                    {completedLessons.includes(selectedLesson?.id) ? 'Lección Completada ✓' : 'Marcar como Completada'}
+                                    {selectedLesson && completedLessons.includes(selectedLesson.id) ? 'Lección Completada ✓' : 'Marcar como Completada'}
                                 </Text>
                             </TouchableOpacity>
                         </ScrollView>

@@ -53,6 +53,7 @@ export default function SettingsScreen() {
         onRequestClose={handleCancelReset}
       >
         <CustomAlert
+          visible={showAlert}
           title="Restablecer Todos los Datos"
           message="Esto eliminará permanentemente todas tus transacciones. Esta acción no se puede deshacer."
           onConfirm={handleConfirmReset}
