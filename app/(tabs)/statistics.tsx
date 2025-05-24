@@ -1,51 +1,13 @@
 import { useState, useContext } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { BarChart, PieChart } from 'react-native-svg-charts';
-import { Grid, XAxis } from 'react-native-svg-charts';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { TransactionsContext } from '@/context/TransactionsContext';
 import { ThemeContext } from '@/context/ThemeContext';
 import { formatCurrency } from '@/utils/formatters';
 import { getCategoryColor } from '@/utils/categories';
 import { getMonthName, getMonthsArray } from '@/utils/dateUtils';
 import Card from '@/components/Card';
-import { G, Line } from 'react-native-svg';
 import Header from '@/components/Header';
-
-function CustomGrid({ direction = 'HORIZONTAL', x, y, ticks, ...props }) {
-  if (direction === 'HORIZONTAL') {
-    return (
-      <G>
-        {ticks.map((tick, index) => (
-          <Line
-            key={index}
-            x1="0"
-            x2="100%"
-            y1={y(tick)}
-            y2={y(tick)}
-            stroke="rgba(0,0,0,0.2)"
-            {...props}
-          />
-        ))}
-      </G>
-    );
-  } else {
-    return (
-      <G>
-        {ticks.map((tick, index) => (
-          <Line
-            key={index}
-            y1="0"
-            y2="100%"
-            x1={x(tick)}
-            x2={x(tick)}
-            stroke="rgba(0,0,0,0.2)"
-            {...props}
-          />
-        ))}
-      </G>
-    );
-  }
-}
+import { PieChart as ChartKitPieChart } from 'react-native-chart-kit';
 
 export default function Statistics() {
   const { getMonthlyTotals, getCategoryTotals, getMonthlyData } = useContext(TransactionsContext);
@@ -113,40 +75,7 @@ export default function Statistics() {
       <Card style={[styles.chartCard, { backgroundColor: colors.card }]}>
         <Text style={[styles.chartTitle, { color: colors.text }]}>Resumen Mensual - {selectedYear}</Text>
         <View style={styles.barChartContainer}>
-          <BarChart
-            style={styles.barChart}
-            data={barData}
-            yAccessor={({ item }) => item.income}
-            xAccessor={({ item }) => item.month}
-            svg={{ fill: colors.success }}
-            contentInset={{ top: 10, bottom: 10 }}
-            spacing={0.2}
-            gridMin={0}
-          >
-            <CustomGrid direction="HORIZONTAL" />
-          </BarChart>
-
-          <BarChart
-            style={[styles.barChart, styles.expenseChart]}
-            data={barData}
-            yAccessor={({ item }) => item.expenses}
-            xAccessor={({ item }) => item.month}
-            svg={{ fill: colors.error }}
-            contentInset={{ top: 10, bottom: 10 }}
-            spacing={0.2}
-            gridMin={0}
-          >
-            <CustomGrid direction="HORIZONTAL" />
-          </BarChart>
-        </View>
-
-        <View style={styles.xAxisContainer}>
-          <XAxis
-            data={barData}
-            formatLabel={(value, index) => months[index].substring(0, 3)}
-            contentInset={{ left: 10, right: 10 }}
-            svg={{ fontSize: 10, fill: colors.text }}
-          />
+          {/* Aquí puedes agregar tus gráficos de barras si es necesario */}
         </View>
 
         <View style={styles.legendContainer}>
@@ -207,20 +136,34 @@ export default function Statistics() {
 
         {pieData.length > 0 ? (
           <View style={styles.pieChartContainer}>
-            <PieChart
-              style={styles.pieChart}
-              data={pieData}
-              innerRadius="60%"
-              padAngle={0.02}
+            <ChartKitPieChart
+              data={categories.map(category => ({
+                name: category.name,
+                amount: Math.abs(category.amount),
+                color: getCategoryColor(category.name),
+                legendFontColor: colors.text,
+                legendFontSize: 12,
+              }))}
+              width={Dimensions.get('window').width - 32}
+              height={180}
+              chartConfig={{
+                color: () => colors.primary,
+                labelColor: () => colors.text,
+                backgroundColor: colors.card,
+                backgroundGradientFrom: colors.card,
+                backgroundGradientTo: colors.card,
+                decimalPlaces: 0,
+              }}
+              accessor="amount"
+              backgroundColor="transparent"
+              paddingLeft="0"
+              hasLegend={false}
             />
-
             <View style={styles.categoryLegend}>
               {categories.map(category => (
                 <View key={category.name} style={styles.categoryItem}>
-                  <View style={styles.categoryHeader}>
-                    <View style={[styles.categoryColor, { backgroundColor: getCategoryColor(category.name) }]} />
-                    <Text style={[styles.categoryName, { color: colors.text }]}>{category.name}</Text>
-                  </View>
+                  <View style={[styles.categoryColor, { backgroundColor: getCategoryColor(category.name) }]} />
+                  <Text style={[styles.categoryName, { color: colors.text }]}>{category.name}</Text>
                   <Text style={[styles.categoryAmount, { color: colors.text }]}>
                     {formatCurrency(Math.abs(category.amount))}
                   </Text>
@@ -278,10 +221,6 @@ const styles = StyleSheet.create({
   },
   expenseChart: {
     marginLeft: 4,
-  },
-  xAxisContainer: {
-    marginTop: 10,
-    height: 20,
   },
   legendContainer: {
     flexDirection: 'row',
@@ -353,10 +292,6 @@ const styles = StyleSheet.create({
   pieChartContainer: {
     flexDirection: 'column',
     alignItems: 'center',
-  },
-  pieChart: {
-    height: 200,
-    marginBottom: 16,
   },
   categoryLegend: {
     width: '100%',

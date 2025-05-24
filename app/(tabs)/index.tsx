@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from
 import { useContext } from 'react';
 import { Plus, ArrowUp, ArrowDown } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
-import { PieChart } from 'react-native-svg-charts';
+import { PieChart as ChartKitPieChart } from 'react-native-chart-kit';
 import { TransactionsContext } from '@/context/TransactionsContext';
 import { ThemeContext } from '@/context/ThemeContext';
 import TransactionCard from '@/components/TransactionCard';
@@ -79,11 +79,28 @@ export default function Dashboard() {
         </Text>
         {pieData.length > 0 ? (
           <View style={styles.chartContainer}>
-            <PieChart
-              style={styles.chart}
-              data={pieData}
-              innerRadius="60%"
-              padAngle={0.02}
+            <ChartKitPieChart
+              data={categories.map(category => ({
+                name: category.name,
+                amount: Math.abs(category.amount),
+                color: getCategoryColor(category.name),
+                legendFontColor: colors.text,
+                legendFontSize: 12,
+              }))}
+              width={Dimensions.get('window').width - 32}
+              height={180}
+              chartConfig={{
+                color: () => colors.primary,
+                labelColor: () => colors.text,
+                backgroundColor: colors.card,
+                backgroundGradientFrom: colors.card,
+                backgroundGradientTo: colors.card,
+                decimalPlaces: 0,
+              }}
+              accessor="amount"
+              backgroundColor="transparent"
+              paddingLeft="0"
+              hasLegend={false}
             />
             <View style={styles.chartLegend}>
               {categories.map(category => (
